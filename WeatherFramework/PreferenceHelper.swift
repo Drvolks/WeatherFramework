@@ -13,7 +13,7 @@ import Foundation
 
 class PreferenceHelper {
     static func addFavorite(_ city: City) {
-        var favorites = getFavoriteCities()
+        let favorites = getFavoriteCities()
         var newFavorites = [City]()
         
         saveSelectedCity(city)
