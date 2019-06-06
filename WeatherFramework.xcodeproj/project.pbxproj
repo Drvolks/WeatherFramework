@@ -32,6 +32,9 @@
 		6E1A729922A94ABF00D7C150 /* UrlHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729822A94ABF00D7C150 /* UrlHelper.swift */; };
 		6E1A729B22A94B6700D7C150 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729A22A94B6700D7C150 /* StringExtension.swift */; };
 		6E1A729D22A94EF000D7C150 /* ExpiringCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729C22A94EF000D7C150 /* ExpiringCacheTests.swift */; };
+		6E1A72A022A9630F00D7C150 /* LocationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729F22A9630F00D7C150 /* LocationManagerMock.swift */; };
+		6E1A72A222A9635A00D7C150 /* LocationServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72A122A9635A00D7C150 /* LocationServicesTests.swift */; };
+		6E1A72A422A964F500D7C150 /* LocationServicesDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72A322A964F500D7C150 /* LocationServicesDelegateMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		6E1A729822A94ABF00D7C150 /* UrlHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlHelper.swift; sourceTree = "<group>"; };
 		6E1A729A22A94B6700D7C150 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		6E1A729C22A94EF000D7C150 /* ExpiringCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiringCacheTests.swift; sourceTree = "<group>"; };
+		6E1A729F22A9630F00D7C150 /* LocationManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerMock.swift; sourceTree = "<group>"; };
+		6E1A72A122A9635A00D7C150 /* LocationServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesTests.swift; sourceTree = "<group>"; };
+		6E1A72A322A964F500D7C150 /* LocationServicesDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesDelegateMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,8 +142,10 @@
 		6E1A725522A93F9300D7C150 /* WeatherFrameworkTests */ = {
 			isa = PBXGroup;
 			children = (
+				6E1A729E22A962A000D7C150 /* Mocks */,
 				6E1A725822A93F9300D7C150 /* Info.plist */,
 				6E1A729C22A94EF000D7C150 /* ExpiringCacheTests.swift */,
+				6E1A72A122A9635A00D7C150 /* LocationServicesTests.swift */,
 			);
 			path = WeatherFrameworkTests;
 			sourceTree = "<group>";
@@ -174,6 +182,15 @@
 				6E1A729622A949EB00D7C150 /* WeatherHelper.swift */,
 			);
 			path = Weather;
+			sourceTree = "<group>";
+		};
+		6E1A729E22A962A000D7C150 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				6E1A729F22A9630F00D7C150 /* LocationManagerMock.swift */,
+				6E1A72A322A964F500D7C150 /* LocationServicesDelegateMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,7 +331,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E1A72A022A9630F00D7C150 /* LocationManagerMock.swift in Sources */,
 				6E1A729D22A94EF000D7C150 /* ExpiringCacheTests.swift in Sources */,
+				6E1A72A222A9635A00D7C150 /* LocationServicesTests.swift in Sources */,
+				6E1A72A422A964F500D7C150 /* LocationServicesDelegateMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,4 +19,5 @@ struct Global {
     static let versionKey = "version"
     static let SettingGroup = "group.com.massawippi.weatherlr"
     static let currentLocationCityId = "currentLocation"
+    static let locationDistance = Double(5000) // 5 km
 }

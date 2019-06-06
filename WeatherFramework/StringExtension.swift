@@ -24,4 +24,12 @@ extension String {
         
         return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }
+    
+    struct NumFormatter {
+        static let instance = NumberFormatter()
+    }
+    
+    var isDouble: Bool {
+        return NumFormatter.instance.number(from: self)?.doubleValue != nil
+    }
 }

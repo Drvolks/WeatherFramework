@@ -13,18 +13,26 @@ import MapKit
 class LocationServices : NSObject, CLLocationManagerDelegate {
     var delegate:LocationServicesDelegate?
     var locationManager : CLLocationManager?
+    var locationManagerType = CLLocationManager.self
     var allCityList:[City]?
     var errorCount = 0
     var locations:[LocatedCity]?
     var serviceActive = false
-    
+  
     func start() {
+        start(manager: CLLocationManager())
+    }
+    
+    func start(manager:CLLocationManager) {
         #if DEBUG
             print("start")
         #endif
-        locationManager = CLLocationManager()
+        locationManager = manager
+        locationManagerType = type(of:manager)
+        
+        // TODO descendre ça à 1km
         locationManager!.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        locationManager!.distanceFilter = 5000 // 5 km
+        locationManager!.distanceFilter = Global.locationDistance
         
         updateCity(PreferenceHelper.getSelectedCity())
     }
@@ -34,21 +42,21 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
             print("updateCity")
         #endif
         
-            if LocationServices.isUseCurrentLocation(cityToUse) {
-                #if DEBUG
-                    print("updateCity " + cityToUse.frenchName)
-                #endif
+        if LocationServices.isUseCurrentLocation(cityToUse) {
+            #if DEBUG
+                print("updateCity " + cityToUse.frenchName)
+            #endif
                 
-                enableLocation()
-                getCurrentLocation()
-            } else {
-                #if DEBUG
-                    print("updateCity " + cityToUse.frenchName)
-                #endif
+            enableLocation()
+            getCurrentLocation()
+        } else {
+            #if DEBUG
+                print("updateCity " + cityToUse.frenchName)
+            #endif
 
-                disableLocation()
-                cityHasBeenUpdated(cityToUse)
-            }
+            disableLocation()
+            cityHasBeenUpdated(cityToUse)
+        }
     }
     
     func cityHasBeenUpdated(_ city:City) {
@@ -117,19 +125,26 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
         locations = [LocatedCity]()
         
         for i in 0..<cities.count {
-            if cities[i].latitude != "" && cities[i].longitude != "" {
-                let clLatitude = CLLocationDegrees(cities[i].latitude)
-                let clLongitude = CLLocationDegrees(cities[i].longitude)
-                let location = CLLocation(latitude: clLatitude!, longitude: clLongitude!)
-                let localCity = LocatedCity(city: cities[i], location: location)
-                
+            if shouldUseCityForLocation(city: cities[i]) {
+                let localCity = buildLocation(city: cities[i])
                 locations?.append(localCity)
             }
         }
         
         #if DEBUG
-        print("buildLocations with \(String(describing: locations?.count)) cities having a location")
+            print("buildLocations with \(String(describing: locations?.count)) cities having a location")
         #endif
+    }
+    
+    func shouldUseCityForLocation(city:City) -> Bool {
+        return !city.latitude.isEmpty && !city.longitude.isEmpty && city.latitude.isDouble && city.longitude.isDouble
+    }
+    
+    func buildLocation(city:City) -> LocatedCity {
+        let clLatitude = CLLocationDegrees(city.latitude)
+        let clLongitude = CLLocationDegrees(city.longitude)
+        let location = CLLocation(latitude: clLatitude!, longitude: clLongitude!)
+        return LocatedCity(city: city, location: location)
     }
     
     func getAllCityList() -> [City] {
@@ -157,15 +172,16 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
     func getCurrentLocation()
     {
         #if DEBUG
-        print("getCurrentLocation")
+            print("getCurrentLocation")
         #endif
-        handleLocationServicesAuthorizationStatus(status: CLLocationManager.authorizationStatus())
+        
+        handleLocationServicesAuthorizationStatus(status: locationManagerType.authorizationStatus())
     }
     
     func handleLocationServicesAuthorizationStatus(status: CLAuthorizationStatus)
     {
         #if DEBUG
-        print("handleLocationServicesAuthorizationStatus")
+            print("handleLocationServicesAuthorizationStatus")
         #endif
         
         switch status
@@ -178,7 +194,9 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
             case .restricted, .denied:
                 // Disable location features
                 disableLocation()
-                delegate!.locationNotAvailable()
+                if(LocationServices.isUseCurrentLocation(PreferenceHelper.getSelectedCity())) {
+                    delegate!.locationNotAvailable()
+                }
                 break
             
             case .authorizedWhenInUse:
@@ -204,56 +222,30 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
     
     func disableLocation() {
         serviceActive = false
-        locationManager!.delegate = nil
+        if let manager = locationManager {
+            manager.delegate = nil
+        }
     }
     
     func enableLocation() {
         serviceActive = true
-        locationManager!.delegate = self
+        if let manager = locationManager {
+            manager.delegate = self
+        }
     }
     
     func locationManager(_ manager: CLLocationManager,
                          didChangeAuthorization status: CLAuthorizationStatus) {
         #if DEBUG
-        print("locationManager didChangeAuthorization")
+            print("locationManager didChangeAuthorization")
         #endif
         
-        switch status {
-            case .restricted, .denied:
-                disableLocation()
-                
-                if(LocationServices.isUseCurrentLocation(PreferenceHelper.getSelectedCity())) {
-                    delegate!.locationNotAvailable()
-                }
-                break
-            
-            case .authorizedWhenInUse:
-                // Enable only your app's when-in-use features.
-                
-                #if os(watchOS)
-                    escalateLocationServiceAuthorization()
-                #endif
-                
-                handleLocationServicesStateAvailable()
-                break
-            
-            case .authorizedAlways:
-                // Enable any of your app's location services.
-                handleLocationServicesStateAvailable()
-                break
-            
-            case .notDetermined:
-                break
-        
-            @unknown default:
-                print("Unknown status from handleLocationServicesAuthorizationStatus")
-                break
-        }
+        handleLocationServicesAuthorizationStatus(status: status)
     }
     
     func escalateLocationServiceAuthorization() {
         // Escalate only when the authorization is set to when-in-use
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+        if locationManagerType.authorizationStatus() == .authorizedWhenInUse {
             locationManager!.requestAlwaysAuthorization()
         }
     }
@@ -267,23 +259,11 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
     func handleLocationServicesStateAvailable()
     {
         #if DEBUG
-        print("handleLocationServicesStateAvailable")
+            print("handleLocationServicesStateAvailable")
         #endif
         
         locationManager?.requestLocation()
     }
-    
-    /*
-    func closestLocation(locations: [CLLocation], closestToLocation location: CLLocation) -> CLLocation? {
-        if let closestLocation = locations.min(by: { location.distance(from: $0) < location.distance(from: $1) }) {
-            print("closest location: \(closestLocation), distance: \(location.distance(from: closestLocation))")
-            return closestLocation
-        } else {
-            print("coordinates is empty")
-            return nil
-        }
-    }
- */
     
     func getAdressAndValidateCanada(_ location: CLLocation) {
         #if DEBUG
