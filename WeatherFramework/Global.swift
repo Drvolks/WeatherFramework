@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Global {
+struct Global {
     static let weatherCacheInMinutes = 30
     static let expirationInMinutes = 30
     static let expirationLocationInMinutes = 60
