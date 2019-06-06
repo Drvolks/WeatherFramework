@@ -45,7 +45,7 @@ class WeatherInformation {
     
     func image() -> UIImage {
         var status = self.weatherStatus
-        if let substitute = WeatherHelper.getImageSubstitute(weatherStatus: self.weatherStatus) {
+        if let substitute = WeatherHelper.getImageSubstitute(self.weatherStatus) {
             status = substitute
         }
         
