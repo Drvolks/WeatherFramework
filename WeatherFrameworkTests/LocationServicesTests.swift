@@ -22,8 +22,7 @@ class LocationServicesTests: XCTestCase {
     override func setUp() {
         locationManager = LocationManagerMock();
         delegate = LocationServicesDelegateMock()
-        city = City(id:"id", frenchName: "frenchName", englishName: "englishName", province: "province", radarId: "radarId", latitude:"10.0", longitude:"10.0")
-        // Montreal
+        city = City(id:"monreal", frenchName: "frenchName", englishName: "englishName", province: "province", radarId: "radarId", latitude:"45.50884", longitude:"-73.58781")
         location = CLLocation(latitude: 45.50884, longitude: -73.58781)
         
         locationManager.mockLocation = location
@@ -33,6 +32,10 @@ class LocationServicesTests: XCTestCase {
         service.locationManager = locationManager
         service.locationManagerType = LocationManagerMock.self
         locationManager.delegate = service
+        
+        let cityInitial = City(id:Global.currentLocationCityId, frenchName: "frenchName", englishName: "englishName", province: "province", radarId: "radarId", latitude:"", longitude:"")
+        PreferenceHelper.saveSelectedCity(cityInitial)
+        PreferenceHelper.saveLastLocatedCity(cityInitial)
     }
     
     override func tearDown() {
@@ -183,7 +186,74 @@ class LocationServicesTests: XCTestCase {
     func testHandleLocationServicesStateAvailable() {
         service.handleLocationServicesStateAvailable()
         XCTAssertTrue(locationManager.isRequestLocation)
-    }                                            
+    }
+    
+    func testDidUpdateLocations() {
+        var locations = [CLLocation]()
+        locations.append(location)
+        
+        service.locationManager(locationManager, didUpdateLocations: locations)
+        XCTAssertFalse(locationManager.isRequestLocation)
+        XCTAssertTrue(delegate.isCityHasBeenUpdated)
+    }
+    
+    func testDidUpdateLocations_errors() {
+        locationManager.mockLocation = nil
+        
+        var locations = [CLLocation]()
+        locations.append(location)
+        
+        service.locationManager(locationManager, didUpdateLocations: locations)
+        XCTAssertTrue(locationManager.isRequestLocation)
+        XCTAssertFalse(delegate.isCityHasBeenUpdated)
+    }
+    
+    func testGetAdressLocalData() {
+        service.getAdressLocalData(location)
+        XCTAssertTrue(delegate.isCityHasBeenUpdated)
+    }
+    
+    func testGetAdressLocalData_error() {
+        location = CLLocation(latitude: 10.0, longitude: 10.0)
+        
+        service.getAdressLocalData(location)
+        XCTAssertFalse(delegate.isCityHasBeenUpdated)
+        XCTAssertEqual(LocationErrors.LocationTooFarOrEmpty, delegate.errorCode)
+    }
+    
+    func testGetClosestLocation() {
+        service.buildLocations()
+        let result = service.getClosestLocation(location)
+        // montreal
+        XCTAssertEqual("qc-147", result?.city.id)
+    }
+    
+    func testGetClosestLocation_dorval() {
+        service.buildLocations()
+        location = CLLocation(latitude: 45.4500, longitude: -73.7500)
+        let result = service.getClosestLocation(location)
+        // Sainte-Catherine
+        XCTAssertEqual("qc-b0", result?.city.id)
+    }
+    
+    func testGetClosestLocation_laval() {
+        service.buildLocations()
+        location = CLLocation(latitude: 45.612499, longitude: -73.707092)
+        let result = service.getClosestLocation(location)
+        // Laval
+        XCTAssertEqual("qc-76", result?.city.id)
+    }
+    
+    func testGetClosestLocation_too_far() {
+        service.buildLocations()
+        location = CLLocation(latitude: 10.0, longitude: 10.0)
+        let result = service.getClosestLocation(location)
+        XCTAssertNil(result)
+    }
+    
+    func testGetAdressAndValidateCanada() {
+        service.getAdressAndValidateCanada(location)
+    }
     
     func testPerformance_buildLocations() {
         self.measure {

@@ -35,6 +35,7 @@
 		6E1A72A022A9630F00D7C150 /* LocationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729F22A9630F00D7C150 /* LocationManagerMock.swift */; };
 		6E1A72A222A9635A00D7C150 /* LocationServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72A122A9635A00D7C150 /* LocationServicesTests.swift */; };
 		6E1A72A422A964F500D7C150 /* LocationServicesDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72A322A964F500D7C150 /* LocationServicesDelegateMock.swift */; };
+		6E1A72A922A9C75D00D7C150 /* LocationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72A822A9C75D00D7C150 /* LocationErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		6E1A729F22A9630F00D7C150 /* LocationManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerMock.swift; sourceTree = "<group>"; };
 		6E1A72A122A9635A00D7C150 /* LocationServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesTests.swift; sourceTree = "<group>"; };
 		6E1A72A322A964F500D7C150 /* LocationServicesDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesDelegateMock.swift; sourceTree = "<group>"; };
+		6E1A72A822A9C75D00D7C150 /* LocationErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				6E1A728222A9420300D7C150 /* LocatedCity.swift */,
 				6E1A728122A9420300D7C150 /* LocationServices.swift */,
 				6E1A728322A9420300D7C150 /* LocationServicesDelegate.swift */,
+				6E1A72A822A9C75D00D7C150 /* LocationErrors.swift */,
 				6E1A729122A948AB00D7C150 /* PreferenceHelper.swift */,
 				6E1A729022A948AA00D7C150 /* PreferenceHelperError.swift */,
 				6E1A729A22A94B6700D7C150 /* StringExtension.swift */,
@@ -324,6 +327,7 @@
 				6E1A727622A941E600D7C150 /* RssEntry.swift in Sources */,
 				6E1A728622A9420300D7C150 /* LocatedCity.swift in Sources */,
 				6E1A729222A948AB00D7C150 /* PreferenceHelperError.swift in Sources */,
+				6E1A72A922A9C75D00D7C150 /* LocationErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -80,7 +80,7 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
                 getCurrentLocation()
             } else {
                 errorCount = 0
-                delegate!.errorLocating(6)
+                delegate!.errorLocating(LocationErrors.TooManyErrors)
             }
             return
         }
@@ -105,15 +105,32 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
             buildLocations()
         }
         
-        if let closestLocation = locations!.min(by: { location.distance(from: $0.location) < location.distance(from: $1.location) }) {
+        if let closestLocation = getClosestLocation(location) {
             print("closest location: \(closestLocation.city.frenchName), distance: \(location.distance(from: closestLocation.location))")
             if closestLocation.city.id != PreferenceHelper.getCityToUse().id {
                 cityHasBeenUpdated(closestLocation.city)
             }
         } else {
-            print("coordinates is empty")
-            delegate!.errorLocating(5)
+            #if DEBUG
+                print("coordinates is empty or too far")
+            #endif
+            delegate!.errorLocating(LocationErrors.LocationTooFarOrEmpty)
         }
+    }
+    
+    func getClosestLocation(_ location: CLLocation) -> LocatedCity? {
+        if let closestLocation = locations!.min(by: { location.distance(from: $0.location) < location.distance(from: $1.location) }) {
+            print("closest location: \(closestLocation.city.frenchName), distance: \(location.distance(from: closestLocation.location))")
+            if location.distance(from: closestLocation.location) < Global.currentLocationMaxDistance {
+                return closestLocation
+            } else {
+                #if DEBUG
+                    print("coordinates is too far")
+                #endif
+            }
+        }
+        
+        return nil
     }
     
     func buildLocations() {

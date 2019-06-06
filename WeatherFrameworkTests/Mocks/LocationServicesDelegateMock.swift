@@ -12,6 +12,7 @@ import Foundation
 class LocationServicesDelegateMock : LocationServicesDelegate {
     var isCityHasBeenUpdated = false
     var isLocationNotAvailable = false
+    var errorCode:Int = LocationErrors.NoError
     
     func cityHasBeenUpdated(_ city: City) {
         isCityHasBeenUpdated = true
@@ -40,7 +41,7 @@ class LocationServicesDelegateMock : LocationServicesDelegate {
     }
     
     func errorLocating(_ errorCode:Int) {
-        
+        self.errorCode = errorCode
     }
     
     func locationNotAvailable() {
