@@ -36,6 +36,20 @@
 		6E1A72A222A9635A00D7C150 /* LocationServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72A122A9635A00D7C150 /* LocationServicesTests.swift */; };
 		6E1A72A422A964F500D7C150 /* LocationServicesDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72A322A964F500D7C150 /* LocationServicesDelegateMock.swift */; };
 		6E1A72A922A9C75D00D7C150 /* LocationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72A822A9C75D00D7C150 /* LocationErrors.swift */; };
+		6E1A72AF22A9CB1500D7C150 /* RssEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72AB22A9CB1400D7C150 /* RssEntryTests.swift */; };
+		6E1A72B022A9CB1500D7C150 /* RssParserStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72AC22A9CB1500D7C150 /* RssParserStub.swift */; };
+		6E1A72B122A9CB1500D7C150 /* RssEntryToWeatherInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72AD22A9CB1500D7C150 /* RssEntryToWeatherInformationTests.swift */; };
+		6E1A72B222A9CB1500D7C150 /* RssParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72AE22A9CB1500D7C150 /* RssParserTests.swift */; };
+		6E1A72B522A9CB4100D7C150 /* TestDataEntry.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A72B322A9CB4000D7C150 /* TestDataEntry.xml */; };
+		6E1A72B622A9CB4100D7C150 /* TestDataEntry_EN.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A72B422A9CB4100D7C150 /* TestDataEntry_EN.xml */; };
+		6E1A72B922A9CB5C00D7C150 /* TestDataEntryCurrent_EN.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A72B722A9CB5C00D7C150 /* TestDataEntryCurrent_EN.xml */; };
+		6E1A72BA22A9CB5C00D7C150 /* TestDataEntryCurrent.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A72B822A9CB5C00D7C150 /* TestDataEntryCurrent.xml */; };
+		6E1A72BC22A9CB6800D7C150 /* TestDataEntryAlert.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A72BB22A9CB6800D7C150 /* TestDataEntryAlert.xml */; };
+		6E1A72BF22A9CB8A00D7C150 /* TestData_EN.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A72BD22A9CB8A00D7C150 /* TestData_EN.xml */; };
+		6E1A72C022A9CB8A00D7C150 /* TestData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A72BE22A9CB8A00D7C150 /* TestData.xml */; };
+		6E1A72C222A9CB9D00D7C150 /* TestDataEntryCurrentNoObservation.xml in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A72C122A9CB9D00D7C150 /* TestDataEntryCurrentNoObservation.xml */; };
+		6E1A72C422A9CBCA00D7C150 /* PreferenceHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A72C322A9CBCA00D7C150 /* PreferenceHelperTests.swift */; };
+		6E26277E22A9CD3A0084B0F0 /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E26277D22A9CD3A0084B0F0 /* TestUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +95,20 @@
 		6E1A72A122A9635A00D7C150 /* LocationServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesTests.swift; sourceTree = "<group>"; };
 		6E1A72A322A964F500D7C150 /* LocationServicesDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesDelegateMock.swift; sourceTree = "<group>"; };
 		6E1A72A822A9C75D00D7C150 /* LocationErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationErrors.swift; sourceTree = "<group>"; };
+		6E1A72AB22A9CB1400D7C150 /* RssEntryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssEntryTests.swift; sourceTree = "<group>"; };
+		6E1A72AC22A9CB1500D7C150 /* RssParserStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssParserStub.swift; sourceTree = "<group>"; };
+		6E1A72AD22A9CB1500D7C150 /* RssEntryToWeatherInformationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssEntryToWeatherInformationTests.swift; sourceTree = "<group>"; };
+		6E1A72AE22A9CB1500D7C150 /* RssParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RssParserTests.swift; sourceTree = "<group>"; };
+		6E1A72B322A9CB4000D7C150 /* TestDataEntry.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestDataEntry.xml; sourceTree = "<group>"; };
+		6E1A72B422A9CB4100D7C150 /* TestDataEntry_EN.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestDataEntry_EN.xml; sourceTree = "<group>"; };
+		6E1A72B722A9CB5C00D7C150 /* TestDataEntryCurrent_EN.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestDataEntryCurrent_EN.xml; sourceTree = "<group>"; };
+		6E1A72B822A9CB5C00D7C150 /* TestDataEntryCurrent.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestDataEntryCurrent.xml; sourceTree = "<group>"; };
+		6E1A72BB22A9CB6800D7C150 /* TestDataEntryAlert.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestDataEntryAlert.xml; sourceTree = "<group>"; };
+		6E1A72BD22A9CB8A00D7C150 /* TestData_EN.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestData_EN.xml; sourceTree = "<group>"; };
+		6E1A72BE22A9CB8A00D7C150 /* TestData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestData.xml; sourceTree = "<group>"; };
+		6E1A72C122A9CB9D00D7C150 /* TestDataEntryCurrentNoObservation.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestDataEntryCurrentNoObservation.xml; sourceTree = "<group>"; };
+		6E1A72C322A9CBCA00D7C150 /* PreferenceHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceHelperTests.swift; sourceTree = "<group>"; };
+		6E26277D22A9CD3A0084B0F0 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,10 +173,14 @@
 		6E1A725522A93F9300D7C150 /* WeatherFrameworkTests */ = {
 			isa = PBXGroup;
 			children = (
+				6E1A72AA22A9CAFF00D7C150 /* Rss */,
+				6E26277822A9CCFD0084B0F0 /* Weather */,
 				6E1A729E22A962A000D7C150 /* Mocks */,
 				6E1A725822A93F9300D7C150 /* Info.plist */,
+				6E26277D22A9CD3A0084B0F0 /* TestUtils.swift */,
 				6E1A729C22A94EF000D7C150 /* ExpiringCacheTests.swift */,
 				6E1A72A122A9635A00D7C150 /* LocationServicesTests.swift */,
+				6E1A72C322A9CBCA00D7C150 /* PreferenceHelperTests.swift */,
 			);
 			path = WeatherFrameworkTests;
 			sourceTree = "<group>";
@@ -194,6 +226,32 @@
 				6E1A72A322A964F500D7C150 /* LocationServicesDelegateMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		6E1A72AA22A9CAFF00D7C150 /* Rss */ = {
+			isa = PBXGroup;
+			children = (
+				6E1A72BD22A9CB8A00D7C150 /* TestData_EN.xml */,
+				6E1A72BE22A9CB8A00D7C150 /* TestData.xml */,
+				6E1A72B422A9CB4100D7C150 /* TestDataEntry_EN.xml */,
+				6E1A72B322A9CB4000D7C150 /* TestDataEntry.xml */,
+				6E1A72B722A9CB5C00D7C150 /* TestDataEntryCurrent_EN.xml */,
+				6E1A72B822A9CB5C00D7C150 /* TestDataEntryCurrent.xml */,
+				6E1A72BB22A9CB6800D7C150 /* TestDataEntryAlert.xml */,
+				6E1A72C122A9CB9D00D7C150 /* TestDataEntryCurrentNoObservation.xml */,
+				6E1A72AB22A9CB1400D7C150 /* RssEntryTests.swift */,
+				6E1A72AD22A9CB1500D7C150 /* RssEntryToWeatherInformationTests.swift */,
+				6E1A72AC22A9CB1500D7C150 /* RssParserStub.swift */,
+				6E1A72AE22A9CB1500D7C150 /* RssParserTests.swift */,
+			);
+			path = Rss;
+			sourceTree = "<group>";
+		};
+		6E26277822A9CCFD0084B0F0 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Weather;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +354,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E1A72BF22A9CB8A00D7C150 /* TestData_EN.xml in Resources */,
+				6E1A72C022A9CB8A00D7C150 /* TestData.xml in Resources */,
+				6E1A72B522A9CB4100D7C150 /* TestDataEntry.xml in Resources */,
+				6E1A72B622A9CB4100D7C150 /* TestDataEntry_EN.xml in Resources */,
+				6E1A72C222A9CB9D00D7C150 /* TestDataEntryCurrentNoObservation.xml in Resources */,
+				6E1A72BC22A9CB6800D7C150 /* TestDataEntryAlert.xml in Resources */,
+				6E1A72BA22A9CB5C00D7C150 /* TestDataEntryCurrent.xml in Resources */,
+				6E1A72B922A9CB5C00D7C150 /* TestDataEntryCurrent_EN.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,9 +402,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E1A72A022A9630F00D7C150 /* LocationManagerMock.swift in Sources */,
+				6E1A72AF22A9CB1500D7C150 /* RssEntryTests.swift in Sources */,
+				6E26277E22A9CD3A0084B0F0 /* TestUtils.swift in Sources */,
 				6E1A729D22A94EF000D7C150 /* ExpiringCacheTests.swift in Sources */,
+				6E1A72B122A9CB1500D7C150 /* RssEntryToWeatherInformationTests.swift in Sources */,
 				6E1A72A222A9635A00D7C150 /* LocationServicesTests.swift in Sources */,
 				6E1A72A422A964F500D7C150 /* LocationServicesDelegateMock.swift in Sources */,
+				6E1A72B022A9CB1500D7C150 /* RssParserStub.swift in Sources */,
+				6E1A72C422A9CBCA00D7C150 /* PreferenceHelperTests.swift in Sources */,
+				6E1A72B222A9CB1500D7C150 /* RssParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
