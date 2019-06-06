@@ -8,14 +8,14 @@
 
 import Foundation
 
-class WeatherInformationWrapper {
+class WeatherInformationWrapper: NSObject {
     var weatherInformations:[WeatherInformation]
     var lastRefresh:Date
     var alerts:[AlertInformation]
     var city:City?
     var initialState = true
     
-    init() {
+    override init() {
         self.weatherInformations = [WeatherInformation]()
         self.lastRefresh = Date(timeIntervalSince1970: 0)
         self.alerts = [AlertInformation]()

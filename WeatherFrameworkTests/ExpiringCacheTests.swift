@@ -35,6 +35,18 @@ class ExpiringCacheTests: XCTestCase {
         XCTAssertNil(cache.object(forKey: key))
     }
     
+    func testTimeout() {
+        cache.setObject(weatherInformation, forKey: key, timeout: 1)
+        XCTAssertNotNil(cache.object(forKey: key)) 
+        
+        let predicate = NSPredicate(format: "rawValue = nil")
+        let exp = expectation(for: predicate, evaluatedWith: cache.object(forKey: key),
+                                      handler: nil)
+        
+        XCTWaiter().wait(for: [exp], timeout: 2)
+        XCTAssertNil(cache.object(forKey: key))
+    }
+    
     func testPerformance() {
         self.measure {
             for i in 1...1000 {
