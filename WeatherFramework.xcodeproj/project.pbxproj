@@ -31,6 +31,7 @@
 		6E1A729522A9494A00D7C150 /* ExpiringCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729422A9494A00D7C150 /* ExpiringCache.swift */; };
 		6E1A729722A949EB00D7C150 /* WeatherHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729622A949EB00D7C150 /* WeatherHelper.swift */; };
 		6E1A729922A94ABF00D7C150 /* UrlHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729822A94ABF00D7C150 /* UrlHelper.swift */; };
+		6E1A729B22A94B6700D7C150 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1A729A22A94B6700D7C150 /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		6E1A729422A9494A00D7C150 /* ExpiringCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpiringCache.swift; sourceTree = "<group>"; };
 		6E1A729622A949EB00D7C150 /* WeatherHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherHelper.swift; path = WeatherFramework/WeatherHelper.swift; sourceTree = SOURCE_ROOT; };
 		6E1A729822A94ABF00D7C150 /* UrlHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UrlHelper.swift; sourceTree = "<group>"; };
+		6E1A729A22A94B6700D7C150 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				6E1A728322A9420300D7C150 /* LocationServicesDelegate.swift */,
 				6E1A729122A948AB00D7C150 /* PreferenceHelper.swift */,
 				6E1A729022A948AA00D7C150 /* PreferenceHelperError.swift */,
+				6E1A729A22A94B6700D7C150 /* StringExtension.swift */,
 				6E1A729822A94ABF00D7C150 /* UrlHelper.swift */,
 				6E1A724B22A93F9300D7C150 /* WeatherFramework.h */,
 				6E1A724C22A93F9300D7C150 /* Info.plist */,
@@ -291,6 +294,7 @@
 				6E1A729522A9494A00D7C150 /* ExpiringCache.swift in Sources */,
 				6E1A726D22A9418D00D7C150 /* City.swift in Sources */,
 				6E1A727F22A941F000D7C150 /* WeatherInformation.swift in Sources */,
+				6E1A729B22A94B6700D7C150 /* StringExtension.swift in Sources */,
 				6E1A727422A941E600D7C150 /* RssParserBase.swift in Sources */,
 				6E1A727C22A941F000D7C150 /* WeatherEnums.swift in Sources */,
 				6E1A728522A9420300D7C150 /* LocationServices.swift in Sources */,
