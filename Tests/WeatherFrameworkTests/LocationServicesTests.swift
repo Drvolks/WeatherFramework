@@ -6,6 +6,7 @@
 //  Copyright © 2019 Consultation Massawippi. All rights reserved.
 //
 
+#if !os(watchOS)
 import XCTest
 import MapKit
 @testable import WeatherFramework
@@ -262,3 +263,4 @@ class LocationServicesTests: XCTestCase {
     }
     
 }
+#endif

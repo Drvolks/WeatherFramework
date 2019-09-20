@@ -6,6 +6,7 @@
 //  Copyright © 2019 Consultation Massawippi. All rights reserved.
 //
 
+#if !os(watchOS)
 import XCTest
 @testable import WeatherFramework
 
@@ -60,3 +61,4 @@ class ExpiringCacheTests: XCTestCase {
     }
     
 }
+#endif

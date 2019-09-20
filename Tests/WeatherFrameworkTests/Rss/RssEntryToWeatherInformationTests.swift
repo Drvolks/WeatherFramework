@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jean-Francois Dufour. All rights reserved.
 //
 
+#if !os(watchOS)
 import XCTest
 @testable import WeatherFramework
 
@@ -1715,3 +1716,4 @@ class RssEntryToWeatherInformationTests: XCTestCase {
         XCTAssertEqual("05 April 2016 08:00", result)
     }
 }
+#endif

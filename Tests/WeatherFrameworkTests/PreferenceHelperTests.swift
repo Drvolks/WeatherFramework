@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jean-Francois Dufour. All rights reserved.
 //
 
+#if !os(watchOS)
 import XCTest
 @testable import WeatherFramework
 
@@ -21,3 +22,4 @@ class PreferenceHelperTests:XCTestCase {
         XCTAssertEqual("en", result)
     }
 }
+#endif

@@ -6,21 +6,17 @@
 //  Copyright © 2016 Jean-Francois Dufour. All rights reserved.
 //
 
+#if !os(watchOS)
 import XCTest
 @testable import WeatherFramework
 
 class RssParserTests: XCTestCase {
     func testRssParserConstructor() {
-        let bundle = Bundle(for: type(of: self))
-        if let path = bundle.path(forResource: "TestData", ofType: "xml")
-        {
-            let xmlData = try! Data(contentsOf: URL(fileURLWithPath: path))
+        let file = try! TestResource(name: "TestData", type: "xml")
+        let xmlData = try! Data(contentsOf: file.url)
         
-            let result = RssParser(xmlData: xmlData, language: Language.French)
-            XCTAssertNotNil(result)
-        } else {
-            XCTFail("Erreur bundle.pathForResource")
-        }
+        let result = RssParser(xmlData: xmlData, language: Language.French)
+        XCTAssertNotNil(result)
     }
     
     func testRssParserConstructorWithUrl() {
@@ -33,23 +29,17 @@ class RssParserTests: XCTestCase {
     }
     
     func testParse() {
-        let bundle = Bundle(for: type(of: self))
-        if let path = bundle.path(forResource: "TestData", ofType: "xml")
-        {
-            let xmlData = try! Data(contentsOf: URL(fileURLWithPath: path))
+        let file = try! TestResource(name: "TestData", type: "xml")
+        let xmlData = try! Data(contentsOf: file.url)
             
-            let parser = RssParser(xmlData: xmlData, language: Language.French)
-            let result = parser.parse()
-            XCTAssertNotNil(result)
-            XCTAssertEqual(14, result.count)
+        let parser = RssParser(xmlData: xmlData, language: Language.French)
+        let result = parser.parse()
+        XCTAssertNotNil(result)
+        XCTAssertEqual(14, result.count)
             
-            for i in 0..<result.count {
-                XCTAssertNotNil(result[i].title)
-                XCTAssertFalse(result[i].title.isEmpty)
-            }
-        }
-        else {
-            XCTFail("Erreur bundle.pathForResource")
+        for i in 0..<result.count {
+            XCTAssertNotNil(result[i].title)
+            XCTAssertFalse(result[i].title.isEmpty)
         }
     }
     
@@ -75,17 +65,12 @@ class RssParserTests: XCTestCase {
     
     func testParsePerformance() {
         self.measure {
-            let bundle = Bundle(for: type(of: self))
-            if let path = bundle.path(forResource: "TestData", ofType: "xml")
-            {
-                let xmlData = try! Data(contentsOf: URL(fileURLWithPath: path))
-                
-                let parser = RssParser(xmlData: xmlData, language: Language.French)
-                let result = parser.parse()
-                XCTAssertEqual(14, result.count)
-            } else {
-                XCTFail("Erreur bundle.pathForResource")
-            }
+            let file = try! TestResource(name: "TestData", type: "xml")
+            let xmlData = try! Data(contentsOf: file.url)
+            let parser = RssParser(xmlData: xmlData, language: Language.French)
+            let result = parser.parse()
+            XCTAssertEqual(14, result.count)
         }
     }
 }
+#endif

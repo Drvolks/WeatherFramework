@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jean-Francois Dufour. All rights reserved.
 //
 
+#if !os(watchOS)
 import XCTest
 @testable import WeatherFramework
 
@@ -80,3 +81,4 @@ class RssEntryTests: XCTestCase {
         XCTAssertEqual("Vendredi soir et nuit: Averses de neige. Températures à la hausse pour atteindre moins 1 en soirée puis à la baisse.", result)
     }
 }
+#endif

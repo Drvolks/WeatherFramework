@@ -20,9 +20,10 @@ class LocationServicesDelegateMock : LocationServicesDelegate {
     
     func getAllCityList() -> [City] {
         NSKeyedUnarchiver.setClass(City.self, forClassName: "weatherlr.City")
-        let url = Bundle(for: City.self).url(forResource: "Cities", withExtension: "plist")!
+        
         do {
-            let rawdata = try Data(contentsOf: url)
+            let file = try TestResource(name: "Cities", type: "plist")
+            let rawdata = try Data(contentsOf: file.url)
             return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(rawdata) as! [City]
         } catch {
             print("Unexpected error: \(error).")
