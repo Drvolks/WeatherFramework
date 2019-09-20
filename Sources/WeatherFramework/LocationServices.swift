@@ -10,8 +10,8 @@
 import Foundation
 import MapKit
 
-class LocationServices : NSObject, CLLocationManagerDelegate {
-    var delegate:LocationServicesDelegate?
+public class LocationServices : NSObject, CLLocationManagerDelegate {
+    public var delegate:LocationServicesDelegate?
     var locationManager : CLLocationManager?
     var locationManagerType = CLLocationManager.self
     var allCityList:[City]?
@@ -19,11 +19,11 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
     var locations:[LocatedCity]?
     var serviceActive = false
   
-    func start() {
+    public func start() {
         start(manager: CLLocationManager())
     }
     
-    func start(manager:CLLocationManager) {
+    public func start(manager:CLLocationManager) {
         #if DEBUG
             print("start")
         #endif
@@ -37,7 +37,7 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
         updateCity(PreferenceHelper.getSelectedCity())
     }
     
-    func updateCity(_ cityToUse:City) {
+    public func updateCity(_ cityToUse:City) {
         #if DEBUG
             print("updateCity")
         #endif
@@ -59,16 +59,16 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func cityHasBeenUpdated(_ city:City) {
+    public func cityHasBeenUpdated(_ city:City) {
         PreferenceHelper.saveLastLocatedCity(city)
         delegate!.cityHasBeenUpdated(city)
     }
         
-    static func isUseCurrentLocation(_ city:City) -> Bool {
+    public static func isUseCurrentLocation(_ city:City) -> Bool {
         return city.id == Global.currentLocationCityId
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         #if DEBUG
             print("didUpdateLocations")
@@ -164,7 +164,7 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
         return LocatedCity(city: city, location: location)
     }
     
-    func getAllCityList() -> [City] {
+    public func getAllCityList() -> [City] {
         if allCityList == nil {
             allCityList = delegate!.getAllCityList()
         }
@@ -172,7 +172,7 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
         return allCityList!
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         print("CL failed: \(error)")
         
@@ -251,7 +251,7 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager,
+    public func locationManager(_ manager: CLLocationManager,
                          didChangeAuthorization status: CLAuthorizationStatus) {
         #if DEBUG
             print("locationManager didChangeAuthorization")
@@ -267,7 +267,7 @@ class LocationServices : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    func refreshLocation() {
+    public func refreshLocation() {
         if serviceActive {
             handleLocationServicesStateAvailable()
         }

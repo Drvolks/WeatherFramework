@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     func localized() ->String {
         
         let path = Bundle.main.path(forResource: PreferenceHelper.getLanguage().rawValue, ofType: "lproj")

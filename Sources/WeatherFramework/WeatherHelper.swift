@@ -8,10 +8,10 @@
 
 import UIKit
 
-class WeatherHelper {
+public class WeatherHelper {
     static let offline = false
     
-    static func getWeatherInformations(_ city:City) -> WeatherInformationWrapper {
+    public static func getWeatherInformations(_ city:City) -> WeatherInformationWrapper {
         if offline {
             return getOfflineWeather()
         } else {
@@ -29,7 +29,7 @@ class WeatherHelper {
         }
     }
     
-    static func getWeatherInformationsNoCache(_ city:City) -> WeatherInformationWrapper {
+    public static func getWeatherInformationsNoCache(_ city:City) -> WeatherInformationWrapper {
         
         let url = UrlHelper.getUrl(city)
         
@@ -42,12 +42,12 @@ class WeatherHelper {
         return WeatherInformationWrapper()
     }
     
-    static func getWeatherInformationsNoCache(_ data:Data, city:City) -> WeatherInformationWrapper {
+    public static func getWeatherInformationsNoCache(_ data:Data, city:City) -> WeatherInformationWrapper {
         let rssParser = RssParser(xmlData: data, language: PreferenceHelper.getLanguage())
         return generateWeatherInformation(rssParser, city: city)
     }
     
-    static func generateWeatherInformation(_ rssParser: RssParser, city: City) -> WeatherInformationWrapper {
+    public static func generateWeatherInformation(_ rssParser: RssParser, city: City) -> WeatherInformationWrapper {
         let rssEntries = rssParser.parse()
         let weatherInformationProcess = RssEntryToWeatherInformation(rssEntries: rssEntries)
         let weatherInformations = weatherInformationProcess.perform()
@@ -81,7 +81,7 @@ class WeatherHelper {
         return WeatherInformationWrapper()
     }
     
-    static func getImageSubstitute(_ weatherStatus: WeatherStatus) -> WeatherStatus? {
+    public static func getImageSubstitute(_ weatherStatus: WeatherStatus) -> WeatherStatus? {
         switch(weatherStatus) {
         case .mainlyClear:
             return WeatherStatus.mainlySunny
@@ -223,7 +223,7 @@ class WeatherHelper {
         }
     }
     
-    static func getMinMaxImage(_ weatherInfo: WeatherInformation, header: Bool) -> UIImage {
+    public static func getMinMaxImage(_ weatherInfo: WeatherInformation, header: Bool) -> UIImage {
         let name = getMinMaxImageName(weatherInfo)
         
         if header {
@@ -233,7 +233,7 @@ class WeatherHelper {
         }
     }
     
-    static func getMinMaxImageName(_ weatherInfo: WeatherInformation) -> String {
+    public static func getMinMaxImageName(_ weatherInfo: WeatherInformation) -> String {
         var name = "up"
         
         if weatherInfo.tendancy == Tendency.minimum {
@@ -247,7 +247,7 @@ class WeatherHelper {
         return name
     }
     
-    static func getIndexAjust(_ weatherInformations:[WeatherInformation]) -> Int {
+    public static func getIndexAjust(_ weatherInformations:[WeatherInformation]) -> Int {
         var indexAjust = 1
         
         if weatherInformations.count == 0 {
@@ -262,7 +262,7 @@ class WeatherHelper {
         return indexAjust
     }
     
-    static func getWeatherTextWithMinMax(_ weatherInfo: WeatherInformation) -> String {
+    public static func getWeatherTextWithMinMax(_ weatherInfo: WeatherInformation) -> String {
         var minMax = "Max "
         if weatherInfo.tendancy == Tendency.minimum {
             minMax = "Min "
@@ -275,7 +275,7 @@ class WeatherHelper {
         return minMax + String(weatherInfo.temperature) + "°"
     }
     
-    static func getWeatherDayWhenText(_ weatherInfo: WeatherInformation) -> String {
+    public static func getWeatherDayWhenText(_ weatherInfo: WeatherInformation) -> String {
         if weatherInfo.weatherDay == WeatherDay.today {
             if weatherInfo.night {
                 return weatherInfo.when
@@ -302,8 +302,7 @@ class WeatherHelper {
         }
     }
     
-    static func addDaystoGivenDate(_ baseDate:Date,NumberOfDaysToAdd:Int)->Date
-    {
+    public static func addDaystoGivenDate(_ baseDate:Date,NumberOfDaysToAdd:Int)->Date {
         var dateComponents = DateComponents()
         let CurrentCalendar = Calendar.current
         
@@ -313,7 +312,7 @@ class WeatherHelper {
         return newDate!
     }
     
-    static func textToImageMinMax(_ weather: WeatherInformation)->UIImage{
+    public static func textToImageMinMax(_ weather: WeatherInformation)->UIImage{
         let baseImage = getMinMaxImage(weather, header: false)
         let text = String(weather.temperature)
         
@@ -352,10 +351,9 @@ class WeatherHelper {
         UIGraphicsEndImageContext()
         
         return newImage
-        
     }
     
-    static func getRefreshTime(_ wrapper: WeatherInformationWrapper) -> String {
+    public static func getRefreshTime(_ wrapper: WeatherInformationWrapper) -> String {
         let lang = PreferenceHelper.getLanguage()
         
         let dateFormatter = DateFormatter()

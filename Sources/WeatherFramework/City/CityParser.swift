@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 import Contacts
 
-class CityParser {
+public class CityParser {
     var outputPath:String
     var coordinates = [Int: CLLocationCoordinate2D]()
     var citiesWithRadar = [String: String]()
@@ -22,11 +22,11 @@ class CityParser {
     let weatherUrl2 = "_metric_f.html"
     let geoCoder = CLGeocoder()
     
-    init(outputPath:String) {
+    public init(outputPath:String) {
         self.outputPath = outputPath
     }
     
-    func perform() {
+    public func perform() {
         for i in 0..<provinces.count {
             for j in 0..<lang.count {
                 print("Parsing " + lang[j] + provinces[i])

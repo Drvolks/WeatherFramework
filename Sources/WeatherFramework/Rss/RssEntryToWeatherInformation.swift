@@ -8,21 +8,21 @@
 
 import UIKit
 
-class RssEntryToWeatherInformation {
+public class RssEntryToWeatherInformation {
     var rssEntries:[RssEntry]
     var day:Int = 0
     let alerts = "AVERTISSEMENT|ALERTE|WARNING|VEILLE|WATCH|AVIS|ADVISORY|BULLETIN|STATEMENT"
     
-    init(rssEntries: [RssEntry]) {
+    public init(rssEntries: [RssEntry]) {
         self.rssEntries = rssEntries
     }
     
-    init(rssEntry: RssEntry) {
+    public init(rssEntry: RssEntry) {
         self.rssEntries = [RssEntry]()
         self.rssEntries.append(rssEntry)
     }
     
-    func perform() -> [WeatherInformation] {
+    public func perform() -> [WeatherInformation] {
         var result = [WeatherInformation]()
         
         var debut = 0
@@ -50,7 +50,7 @@ class RssEntryToWeatherInformation {
         return result
     }
     
-    func getAlerts() -> [AlertInformation] {
+    public func getAlerts() -> [AlertInformation] {
         var result = [AlertInformation]()
         
         for i in 0..<rssEntries.count {
@@ -66,7 +66,7 @@ class RssEntryToWeatherInformation {
         return result
     }
     
-    func convert(_ rssEntry: RssEntry) -> WeatherInformation {
+    public func convert(_ rssEntry: RssEntry) -> WeatherInformation {
         let night = isNight(rssEntry.title)
         let weatherDay = convertWeatherDay(rssEntry.category, currentDay: day)
         
@@ -108,7 +108,7 @@ class RssEntryToWeatherInformation {
         return result
     }
     
-    func convertAlert(_ rssEntry: RssEntry) -> AlertInformation {
+    public func convertAlert(_ rssEntry: RssEntry) -> AlertInformation {
         let alertText = extractAlertText(rssEntry.title)
         if !alertText.isEmpty {
             let alertType = extractAlertType(alertText)
@@ -119,7 +119,7 @@ class RssEntryToWeatherInformation {
         return AlertInformation()
     }
     
-    func extractAlertType(_ alertText:String) -> AlertType {
+    public func extractAlertType(_ alertText:String) -> AlertType {
         let regex = try! NSRegularExpression(pattern: "(TERMINÉ|ENDED)$", options: [.caseInsensitive])
         let ended = performRegex(regex, text: alertText, index: 1)
         
@@ -130,7 +130,7 @@ class RssEntryToWeatherInformation {
         return AlertType.warning
     }
     
-    func convertWeatherStatus(_ text: String) -> WeatherStatus {
+    public func convertWeatherStatus(_ text: String) -> WeatherStatus {
         switch text.lowercased() {
         case "partiellement nuageux", "partly cloudy":
             return WeatherStatus.partlyCloudy
@@ -447,7 +447,7 @@ class RssEntryToWeatherInformation {
         }
     }
     
-    func convertWeatherStatusWithRegex(_ text: String) -> WeatherStatus {
+    public func convertWeatherStatusWithRegex(_ text: String) -> WeatherStatus {
         var regex = try! NSRegularExpression(pattern: "Nuageux avec \\d* pour cent de probabilité d'averses de neige", options: [.caseInsensitive])
         var match = regex.matches(in: text, options: [], range: NSMakeRange(0, text.distance(from: text.startIndex, to: text.endIndex)))
         if match.count > 0 {
@@ -463,7 +463,7 @@ class RssEntryToWeatherInformation {
         return WeatherStatus.na
     }
     
-    func convertWeatherDay(_ text: String, currentDay: Int) -> WeatherDay {
+    public func convertWeatherDay(_ text: String, currentDay: Int) -> WeatherDay {
         switch text {
         case "Conditions actuelles", "Current Conditions":
             return WeatherDay.now
@@ -477,7 +477,7 @@ class RssEntryToWeatherInformation {
         }
     }
     
-    func performRegex(_ regex: NSRegularExpression, text: String, index: Int) -> String {
+    public func performRegex(_ regex: NSRegularExpression, text: String, index: Int) -> String {
         let results = regex.matches(in: text, options: [], range: NSMakeRange(0, text.distance(from: text.startIndex, to: text.endIndex)))
         if let result = results.first {
             var condition = (text as NSString).substring(with: result.range(at: index))
@@ -489,37 +489,37 @@ class RssEntryToWeatherInformation {
     }
     
     
-    func extractWeatherConditionNowFromSummary(_ summary: String) -> String {
+    public func extractWeatherConditionNowFromSummary(_ summary: String) -> String {
         let regex = try! NSRegularExpression(pattern: "<b>Condition:</b>(.*?)<br/>", options: [.caseInsensitive])
         return performRegex(regex, text: summary, index: 1)
     }
     
-    func extractTemperatureNowFromSummary(_ summary: String) -> String {
+    public func extractTemperatureNowFromSummary(_ summary: String) -> String {
         let regex = try! NSRegularExpression(pattern: "<b>(Temperature|Température):</b>(.*?)&deg;", options: [.caseInsensitive])
         return performRegex(regex, text: summary, index: 2)
     }
     
-    func extractWeatherConditionNowFromTitle(_ title: String) -> String {
+    public func extractWeatherConditionNowFromTitle(_ title: String) -> String {
         let regex = try! NSRegularExpression(pattern: "^.*?:([^0-9]*?),", options: [.caseInsensitive])
         return performRegex(regex, text: title, index: 1)
     }
     
-    func extractTemperatureNowFromTitle(_ title: String) -> String {
+    public func extractTemperatureNowFromTitle(_ title: String) -> String {
         let regex = try! NSRegularExpression(pattern: ".*?[,:]? ([-\\d,\\.]*?)(°|&#xB0;)", options: [.caseInsensitive])
         return performRegex(regex, text: title, index: 1)
     }
     
-    func extractWeatherCondition(_ summary: String) -> String {
+    public func extractWeatherCondition(_ summary: String) -> String {
         let regex = try! NSRegularExpression(pattern: "^.*?:(.*?)\\.", options: [.caseInsensitive])
         return performRegex(regex, text: summary, index: 1)
     }
     
-    func extractTemperature(_ summary: String) -> String {
+    public func extractTemperature(_ summary: String) -> String {
         let regex = try! NSRegularExpression(pattern: ".*?(High|Low|Maximum|Minimum|stables près de|steady near|à la baisse pour atteindre|falling to|à la hausse pour atteindre|rising to) (.*?)(\\.|with|avec|sauf|except|en après-midi|in the afternoon|au cours de la nuit|by morning|cet après-midi|this afternoon|ce matin puis à la hausse|this morning then rising|en soirée puis à la baisse|in the evening then falling|ce matin puis stables|this morning then steady|le matin puis stables|in the morning then steady|le matin puis à la hausse|in the morning then rising|ce soir puis à la baisse|this evening then falling|ce soir puis stable|this evening then steady)", options: [.caseInsensitive])
         return performRegex(regex, text: summary, index: 2)
     }
     
-    func convertTemperature(_ temperature: String) -> Int {
+    public func convertTemperature(_ temperature: String) -> Int {
         let data = temperature.replacingOccurrences(of: ",", with: ".")
         
         if data == "zéro" || data == "zero" {
@@ -533,7 +533,7 @@ class RssEntryToWeatherInformation {
         return 0
     }
     
-    func convertTemperatureWithTextSign(_ temperature: String) -> Int {
+    public func convertTemperatureWithTextSign(_ temperature: String) -> Int {
         let text = temperature.lowercased()
         
         var regex = try! NSRegularExpression(pattern: "^(plus|minus|moins)", options: [.caseInsensitive])
@@ -550,7 +550,7 @@ class RssEntryToWeatherInformation {
         return tempDouble
     }
     
-    func nettoyerDetail(_ text: String) -> String {
+    public func nettoyerDetail(_ text: String) -> String {
         let regex = try! NSRegularExpression(pattern: "(Prévisions émises|Forecast issued).*$", options: [.caseInsensitive])
         let textRegex = NSMutableString(string: text)
         regex.replaceMatches(in: textRegex, options: .withTransparentBounds, range: NSMakeRange(0, text.distance(from: text.startIndex, to: text.endIndex)), withTemplate: "")
@@ -559,7 +559,7 @@ class RssEntryToWeatherInformation {
         return result
     }
     
-    func isMaximumTemperature(_ summary: String) -> Bool {
+    public func isMaximumTemperature(_ summary: String) -> Bool {
         let regex = try! NSRegularExpression(pattern: "(High|Maximum)", options: [.caseInsensitive])
         let highLow = performRegex(regex, text: summary, index: 1)
         if !highLow.isEmpty {
@@ -569,7 +569,7 @@ class RssEntryToWeatherInformation {
         return false
     }
     
-    func isNight(_ title: String) -> Bool {
+    public func isNight(_ title: String) -> Bool {
         let regex = try! NSRegularExpression(pattern: "(Ce soir|Soir et nuit|Night)", options: [.caseInsensitive])
         let night = performRegex(regex, text: title, index: 1)
         if night.isEmpty {
@@ -579,12 +579,12 @@ class RssEntryToWeatherInformation {
         return true
     }
     
-    func extractWhen(_ title: String) -> String {
+    public func extractWhen(_ title: String) -> String {
         let regex = try! NSRegularExpression(pattern: "^(.*?):", options: [.caseInsensitive])
         return performRegex(regex, text: title, index: 1)
     }
     
-    func extractTendency(_ title: String) -> Tendency {
+    public func extractTendency(_ title: String) -> Tendency {
         let regex = try! NSRegularExpression(pattern: ".*?(High|Low|Maximum|Minimum|stables|steady)", options: [.caseInsensitive])
         let tendency = performRegex(regex, text: title, index: 1)
         
@@ -600,7 +600,7 @@ class RssEntryToWeatherInformation {
         }
     }
     
-    func isAlert(_ title: String) -> Bool {
+    public func isAlert(_ title: String) -> Bool {
         let regex = try! NSRegularExpression(pattern: ".*?(Aucune veille ou alerte en vigueur|No watches or warnings in effect|IN EFFECT|" + alerts + ").*?", options: [])
         let alert = performRegex(regex, text: title, index: 1)
         if alert.isEmpty {
@@ -610,7 +610,7 @@ class RssEntryToWeatherInformation {
         return true
     }
     
-    func extractAlertText(_ title: String) -> String {
+    public func extractAlertText(_ title: String) -> String {
         var regex = try! NSRegularExpression(pattern: "(" + alerts + ")", options: [])
         let alert = performRegex(regex, text: title, index: 1)
         if alert.isEmpty {
@@ -623,7 +623,7 @@ class RssEntryToWeatherInformation {
         return alertText
     }
     
-    func obtenirDateObservation(_ summary: String) -> String {
+    public func obtenirDateObservation(_ summary: String) -> String {
         // TODO AM PM en anglais
         let regex = try! NSRegularExpression(pattern: ".*(Enregistrées à|Observed at).*(\\d\\d[h:]\\d\\d).*(\\d\\d \\w* \\d\\d\\d\\d)", options: [.caseInsensitive])
         let dateObservationHeure = performRegex(regex, text: summary, index: 2)

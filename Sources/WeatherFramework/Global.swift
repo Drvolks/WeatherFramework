@@ -8,17 +8,17 @@
 
 import Foundation
 
-struct Global {
-    static let weatherCacheInMinutes = 30
-    static let expirationInMinutes = 30
-    static let expirationLocationInMinutes = 60
-    static let selectedCityKey = "selectedCity"
-    static let lastLocatedCityKey = "lastLocatedCity"
-    static let favotiteCitiesKey = "favoriteCities"
-    static let languageKey = "lang"
-    static let versionKey = "version"
-    static let SettingGroup = "group.com.massawippi.weatherlr"
-    static let currentLocationCityId = "currentLocation"
-    static let locationDistance = Double(5000) // 5 km
-    static let currentLocationMaxDistance = Double(1000000) // 1000 km
+public struct Global {
+    public static let weatherCacheInMinutes = 30
+    public static let expirationInMinutes = 30
+    public static let expirationLocationInMinutes = 60
+    public static let selectedCityKey = "selectedCity"
+    public static let lastLocatedCityKey = "lastLocatedCity"
+    public static let favotiteCitiesKey = "favoriteCities"
+    public static let languageKey = "lang"
+    public static let versionKey = "version"
+    public static let SettingGroup = "group.com.massawippi.weatherlr"
+    public static let currentLocationCityId = "currentLocation"
+    public static let locationDistance = Double(5000) // 5 km
+    public static let currentLocationMaxDistance = Double(1000000) // 1000 km
 }

@@ -8,8 +8,8 @@
 
 import Foundation
 
-class CityHelper {
-    static func searchCity(_ searchText: String, allCityList: [City]) -> [City] {
+public class CityHelper {
+    public static func searchCity(_ searchText: String, allCityList: [City]) -> [City] {
         var newFilteredList = [City]()
         
         for i in 0..<allCityList.count {
@@ -27,7 +27,7 @@ class CityHelper {
         return newFilteredList
     }
     
-    static func searchCityStartingWith(_ searchText: String, allCityList: [City]) -> [City] {
+    public static func searchCityStartingWith(_ searchText: String, allCityList: [City]) -> [City] {
         var newFilteredList = [City]()
         
         for i in 0..<allCityList.count {
@@ -43,7 +43,7 @@ class CityHelper {
         return newFilteredList
     }
     
-    static func searchSingleCity(_ searchText: String, allCityList: [City]) -> City? {
+    public static func searchSingleCity(_ searchText: String, allCityList: [City]) -> City? {
         let result = searchCity(searchText, allCityList: allCityList)
         if result.count > 0 {
             return result[0]
@@ -53,7 +53,7 @@ class CityHelper {
     }
     
     
-    static func cityNameForSearch(_ city: City) -> String {
+    public static func cityNameForSearch(_ city: City) -> String {
         var name = city.englishName
         if(PreferenceHelper.isFrench()) {
             name = city.frenchName
@@ -64,7 +64,7 @@ class CityHelper {
         return name
     }
     
-    static func cityName(_ city:City) -> String {
+    public static func cityName(_ city:City) -> String {
         var name = city.englishName
         if(PreferenceHelper.isFrench()) {
             name = city.frenchName
@@ -73,7 +73,7 @@ class CityHelper {
         return name;
     }
     
-    static func sortCityList(_ cityListToSort: [City]) -> [City] {
+    public static func sortCityList(_ cityListToSort: [City]) -> [City] {
         var newCityList = cityListToSort
         
         if PreferenceHelper.isFrench() {
@@ -85,7 +85,7 @@ class CityHelper {
         return newCityList
     }
     
-    static func getCurrentLocationCity() -> City {
+    public static func getCurrentLocationCity() -> City {
         let currentLocation = City()
         currentLocation.englishName = "Use Current Location"
         currentLocation.frenchName = "Utiliser la géolocalisation"
@@ -94,7 +94,7 @@ class CityHelper {
         return currentLocation
     }
     
-    static func loadAllCities() -> [City] {
+    public static func loadAllCities() -> [City] {
         let url = Bundle.main.url(forResource: "Cities", withExtension: "plist")!
         do {
             let rawdata = try Data(contentsOf: url)

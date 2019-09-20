@@ -8,18 +8,18 @@
 
 import UIKit
 
-class WeatherInformation {
-    var temperature:Int
-    var weatherStatus:WeatherStatus
-    var weatherDay:WeatherDay
-    var detail:String
-    var summary:String
-    var tendancy:Tendency
-    var when: String
-    var night:Bool
-    var dateObservation:String
+public class WeatherInformation {
+    public var temperature:Int
+    public var weatherStatus:WeatherStatus
+    public var weatherDay:WeatherDay
+    public var detail:String
+    public var summary:String
+    public var tendancy:Tendency
+    public var when: String
+    public var night:Bool
+    public var dateObservation:String
     
-    init() {
+    public init() {
         temperature = 0
         weatherStatus = .na
         weatherDay = .now
@@ -31,7 +31,7 @@ class WeatherInformation {
         dateObservation = ""
     }
     
-    init(temperature: Int, weatherStatus: WeatherStatus, weatherDay: WeatherDay, summary: String, detail: String, tendancy:Tendency, when: String, night: Bool, dateObservation: String) {
+    public init(temperature: Int, weatherStatus: WeatherStatus, weatherDay: WeatherDay, summary: String, detail: String, tendancy:Tendency, when: String, night: Bool, dateObservation: String) {
         self.temperature = temperature
         self.weatherStatus = weatherStatus
         self.weatherDay = weatherDay
@@ -43,7 +43,7 @@ class WeatherInformation {
         self.dateObservation = dateObservation
     }
     
-    func image() -> UIImage {
+    public func image() -> UIImage {
         var status = self.weatherStatus
         if let substitute = WeatherHelper.getImageSubstitute(self.weatherStatus) {
             status = substitute

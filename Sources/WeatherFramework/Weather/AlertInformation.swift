@@ -8,18 +8,18 @@
 
 import Foundation
 
-class AlertInformation{
-    var alertText:String
-    var url:String
-    var type:AlertType
+public class AlertInformation{
+    public var alertText:String
+    public var url:String
+    public var type:AlertType
     
-    init() {
+    public init() {
         alertText = ""
         url = ""
         type = AlertType.none
     }
     
-    init(alertText: String, url: String, type:AlertType) {
+    public init(alertText: String, url: String, type:AlertType) {
         self.alertText = alertText
         self.url = url
         self.type = type

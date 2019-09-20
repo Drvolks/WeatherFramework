@@ -8,15 +8,15 @@
 
 import UIKit
 
-class RssEntry : RssParserBase {
-    var title = ""
-    var updated = ""
-    var summary = ""
-    var category = ""
-    var day = 0
-    var language:Language
-    var parent:RssParser
-    var link:String = ""
+public class RssEntry : RssParserBase {
+    public var title = ""
+    public var updated = ""
+    public var summary = ""
+    public var category = ""
+    public var day = 0
+    public var language:Language
+    public var parent:RssParser
+    public var link:String = ""
     
     let titleElement = "title"
     let categoryElement = "category"
@@ -27,12 +27,12 @@ class RssEntry : RssParserBase {
     let termAttribute = "term"
     let hrefAttribute = "href"
     
-    init(parent: RssParser, language: Language) {
+    public init(parent: RssParser, language: Language) {
         self.parent = parent
         self.language = language
     }
     
-    init(parent: RssParser) {
+    public init(parent: RssParser) {
         self.parent = parent
         self.language = Language.French
     }

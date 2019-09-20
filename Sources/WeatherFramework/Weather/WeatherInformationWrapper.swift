@@ -8,14 +8,14 @@
 
 import Foundation
 
-class WeatherInformationWrapper: NSObject {
-    var weatherInformations:[WeatherInformation]
-    var lastRefresh:Date
-    var alerts:[AlertInformation]
-    var city:City?
-    var initialState = true
+public class WeatherInformationWrapper: NSObject {
+    public var weatherInformations:[WeatherInformation]
+    public var lastRefresh:Date
+    public var alerts:[AlertInformation]
+    public var city:City?
+    public var initialState = true
     
-    override init() {
+    public override init() {
         self.weatherInformations = [WeatherInformation]()
         self.lastRefresh = Date(timeIntervalSince1970: 0)
         self.alerts = [AlertInformation]()
@@ -23,7 +23,7 @@ class WeatherInformationWrapper: NSObject {
         self.initialState = true
     }
     
-    init(weatherInformations:[WeatherInformation], alerts:[AlertInformation], city:City) {
+    public init(weatherInformations:[WeatherInformation], alerts:[AlertInformation], city:City) {
         self.weatherInformations = weatherInformations
         self.lastRefresh = Date()
         self.alerts = alerts
@@ -31,7 +31,7 @@ class WeatherInformationWrapper: NSObject {
         self.initialState = false
     }
     
-    func expired() -> Bool {
+    public func expired() -> Bool {
         let elapsedTime = Calendar.current.dateComponents([.minute], from: lastRefresh as Date, to: Date()).minute
         if elapsedTime! < Global.expirationInMinutes {
             return false
@@ -40,7 +40,7 @@ class WeatherInformationWrapper: NSObject {
         }
     }
     
-    func expiredTooLongAgo() -> Bool {
+    public func expiredTooLongAgo() -> Bool {
         let elapsedTime = Calendar.current.dateComponents([.minute], from: lastRefresh as Date, to: Date()).minute
         if elapsedTime! < (Global.expirationInMinutes * 3) {
             return false
@@ -49,7 +49,7 @@ class WeatherInformationWrapper: NSObject {
         }
     }
     
-    func refreshNeeded() -> Bool {
+    public func refreshNeeded() -> Bool {
         if initialState || weatherInformations.count == 0 {
             return true
         }

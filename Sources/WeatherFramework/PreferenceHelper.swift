@@ -11,8 +11,8 @@ import Foundation
     import UIKit
 #endif
 
-class PreferenceHelper {
-    static func addFavorite(_ city: City) {
+public class PreferenceHelper {
+    public static func addFavorite(_ city: City) {
         let favorites = getFavoriteCities()
         var newFavorites = [City]()
         
@@ -31,7 +31,7 @@ class PreferenceHelper {
         updateQuickActions()
     }
     
-    static func updateQuickActions() {
+    public static func updateQuickActions() {
         #if os(iOS)
             var shortcutItems = [UIApplicationShortcutItem]()
             let cities = PreferenceHelper.getFavoriteCities()
@@ -51,7 +51,7 @@ class PreferenceHelper {
         #endif
     }
     
-    static func getFavoriteCities() -> [City] {
+    public static func getFavoriteCities() -> [City] {
         let currentLocation = CityHelper.getCurrentLocationCity()
         
         do {
@@ -78,7 +78,7 @@ class PreferenceHelper {
         return savedfavorites
     }
     
-    static func getFavoriteCitiesWithClassName(_ className:String) throws -> [City] {
+    public static func getFavoriteCitiesWithClassName(_ className:String) throws -> [City] {
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         NSKeyedUnarchiver.setClass(City.self, forClassName: className)
         
@@ -94,7 +94,7 @@ class PreferenceHelper {
         throw PreferenceHelperError.unarchiveError
     }
     
-    static func switchFavoriteCity(cityId: String) {
+    public static func switchFavoriteCity(cityId: String) {
         let cities = getFavoriteCities()
         
         for city in cities {
@@ -113,7 +113,7 @@ class PreferenceHelper {
         defaults.synchronize()
     }
     
-    static func saveSelectedCity(_ city: City) {
+    public static func saveSelectedCity(_ city: City) {
         NSKeyedArchiver.setClassName("City", for: City.self)
         let archivedObject = try! NSKeyedArchiver.archivedData(withRootObject: city, requiringSecureCoding: false)
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
@@ -121,7 +121,7 @@ class PreferenceHelper {
         defaults.synchronize()
     }
     
-    static func getSelectedCity() -> City {
+    public static func getSelectedCity() -> City {
         if let city = getCity(key: Global.selectedCityKey) {
             return city
         }
@@ -194,7 +194,7 @@ class PreferenceHelper {
         return city
     }
     
-    static func removeFavorite(_ city: City) {
+    public static func removeFavorite(_ city: City) {
         let favorites = getFavoriteCities()
         
         if favorites.count == 0 {
@@ -217,7 +217,7 @@ class PreferenceHelper {
             }
     }
     
-    static func removeFavorites() {
+    public static func removeFavorites() {
         let favorites = getFavoriteCities()
         
         if favorites.count == 0 {
@@ -230,7 +230,7 @@ class PreferenceHelper {
         saveFavoriteCities(newFavorites)
     }
     
-    static func getLanguage() -> Language {
+    public static func getLanguage() -> Language {
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         if let lang = defaults.object(forKey: Global.languageKey) as? String {
             if let langEnum = Language(rawValue: lang) {
@@ -247,7 +247,7 @@ class PreferenceHelper {
          return Language.English
     }
     
-    static func saveLanguage(_ language: Language) {
+    public static func saveLanguage(_ language: Language) {
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         defaults.set(language.rawValue, forKey: Global.languageKey)
         defaults.synchronize()
@@ -255,7 +255,7 @@ class PreferenceHelper {
         ExpiringCache.instance.removeAllObjects()
     }
     
-    static func isFrench() -> Bool {
+    public static func isFrench() -> Bool {
         if getLanguage() == Language.French {
             return true
         }
@@ -263,7 +263,7 @@ class PreferenceHelper {
         return false
     }
     
-    static func extractLang(_ locale:String) -> String {
+    public static func extractLang(_ locale:String) -> String {
         if let index = locale.range(of: "-") {
             return String(locale[..<index.lowerBound])
         }
@@ -271,7 +271,7 @@ class PreferenceHelper {
         return locale
     }
     
-    static func upgrade() {
+    public static func upgrade() {
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         var shouldUpdateQuickActions = false
         var previousVersion = Double(0)
@@ -300,7 +300,7 @@ class PreferenceHelper {
         }
     }
     
-    static func getCityToUse() -> City {
+    public static func getCityToUse() -> City {
         let selectedCity = getSelectedCity()
             if selectedCity.id == Global.currentLocationCityId {
                 if let city = getCity(key: Global.lastLocatedCityKey) {
@@ -313,7 +313,7 @@ class PreferenceHelper {
         return CityHelper.getCurrentLocationCity()
     }
     
-    static func saveLastLocatedCity(_ city: City) {
+    public static func saveLastLocatedCity(_ city: City) {
         NSKeyedArchiver.setClassName("City", for: City.self)
         let archivedObject = try! NSKeyedArchiver.archivedData(withRootObject: city, requiringSecureCoding: false)
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
@@ -321,7 +321,7 @@ class PreferenceHelper {
         defaults.synchronize()
     }
     
-    static func removeLastLocatedCity() {
+    public static func removeLastLocatedCity() {
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         defaults.removeObject(forKey: Global.lastLocatedCityKey)
         defaults.synchronize()

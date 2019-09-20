@@ -9,17 +9,17 @@
 import Foundation
 import MapKit
 
-class City : NSObject, NSCoding {
-    var id = ""
-    var frenchName = ""
-    var englishName = ""
-    var province = ""
-    var radarId = ""
-    var latitude = ""
-    var longitude = ""
+public class City : NSObject, NSCoding {
+    public var id = ""
+    public var frenchName = ""
+    public var englishName = ""
+    public var province = ""
+    public var radarId = ""
+    public var latitude = ""
+    public var longitude = ""
     
     // MARK: Types
-    struct PropertyKey {
+    public struct PropertyKey {
         static let frenchNameKey = "frenchName"
         static let englishNameKey = "englishName"
         static let idKey = "id"
@@ -29,11 +29,11 @@ class City : NSObject, NSCoding {
         static let longitudeKey = "longitude"
     }
     
-    override init() {
+    public override init() {
         super.init()
     }
     
-    init(id: String, frenchName: String, englishName: String, province: String, radarId: String, latitude:String, longitude:String) {
+    public init(id: String, frenchName: String, englishName: String, province: String, radarId: String, latitude:String, longitude:String) {
         self.id = id
         self.frenchName = frenchName
         self.englishName = englishName
@@ -44,7 +44,7 @@ class City : NSObject, NSCoding {
     }
     
     // MARK: NSCoding
-    func encode(with aCoder: NSCoder) {
+    public func encode(with aCoder: NSCoder) {
         aCoder.encode(frenchName, forKey: PropertyKey.frenchNameKey)
         aCoder.encode(englishName, forKey: PropertyKey.englishNameKey)
         aCoder.encode(id, forKey: PropertyKey.idKey)
@@ -54,7 +54,7 @@ class City : NSObject, NSCoding {
         aCoder.encode(longitude, forKey: PropertyKey.longitudeKey)
     }
     
-    required convenience init?(coder aDecoder: NSCoder) {
+    public required convenience init?(coder aDecoder: NSCoder) {
         let frenchName = aDecoder.decodeObject(forKey: PropertyKey.frenchNameKey) as! String
         let englishName = aDecoder.decodeObject(forKey: PropertyKey.englishNameKey) as! String
         let province = aDecoder.decodeObject(forKey: PropertyKey.provinceKey) as! String

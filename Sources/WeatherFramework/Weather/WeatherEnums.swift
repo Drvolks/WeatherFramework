@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum WeatherStatus {
+public enum WeatherStatus {
     case aFewClouds
     case aFewFlurries
     case aFewRainShowersOrFlurries
@@ -170,13 +170,13 @@ enum WeatherStatus {
     case unitTest
 }
 
-enum WeatherColor : Int {
+public enum WeatherColor : Int {
     case rain = 0x1fbfff
     case defaultColor = 0x1f4f74
     case watchRing = 0x65DA7D
 }
 
-enum WeatherDay : Int {
+public enum WeatherDay : Int {
     case now = -1
     case today = 0
     case tomorow = 1
@@ -202,21 +202,21 @@ enum WeatherDay : Int {
     case na = -99
 }
 
-enum Tendency {
+public enum Tendency {
     case minimum
     case maximum
     case steady
     case na
 }
 
-enum Language: String {
+public enum Language: String {
     case French = "fr"
     case English = "en"
     
-    static let all = [French, English]
+    public static let all = [French, English]
 }
 
-enum AlertType {
+public enum AlertType {
     case warning
     case ended
     case none
