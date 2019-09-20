@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum WeatherStatus {
+public enum WeatherStatus : CaseIterable {
     case aFewClouds
     case aFewFlurries
     case aFewRainShowersOrFlurries
@@ -209,11 +209,9 @@ public enum Tendency {
     case na
 }
 
-public enum Language: String {
+public enum Language: String, CaseIterable {
     case French = "fr"
     case English = "en"
-    
-    public static let all = [French, English]
 }
 
 public enum AlertType {
