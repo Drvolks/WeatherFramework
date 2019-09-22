@@ -98,6 +98,9 @@ public class CityHelper {
         let url = Bundle.main.url(forResource: "Cities", withExtension: "plist")!
         do {
             let rawdata = try Data(contentsOf: url)
+            
+            NSKeyedUnarchiver.setClass(City.self, forClassName: "City")
+            NSKeyedUnarchiver.setClass(City.self, forClassName: "weatherlr.City")
             return try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(rawdata) as! [City]
         } catch {
             print("Unexpected error: \(error).")
