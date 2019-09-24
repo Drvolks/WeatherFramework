@@ -26,8 +26,16 @@ public extension String {
     }
 
     var isDouble: Bool {
+        if(isDouble(",")) {
+            return true
+        }
+        
+        return isDouble(".")
+    }
+    
+    private func isDouble(_ delemiter:String) -> Bool {
         let formatter = NumberFormatter()
-        formatter.decimalSeparator = ","
+        formatter.decimalSeparator = delemiter
         let doubleFormatted = formatter.number(from: self)
 
         if (doubleFormatted?.doubleValue) != nil {

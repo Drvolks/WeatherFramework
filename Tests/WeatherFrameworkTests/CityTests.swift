@@ -24,7 +24,15 @@ class CityTests: XCTestCase {
         city = nil
     }
     
-    func testGpsNumbers() {
+    func testGpsNumbers_virgule() {
+        XCTAssertTrue(city.latitude.isDouble)
+        XCTAssertTrue(city.longitude.isDouble)
+    }
+    
+    func testGpsNumbers_point() {
+        city.latitude = "45.50884"
+        city.longitude = "-73.58781"
+        
         XCTAssertTrue(city.latitude.isDouble)
         XCTAssertTrue(city.longitude.isDouble)
     }
