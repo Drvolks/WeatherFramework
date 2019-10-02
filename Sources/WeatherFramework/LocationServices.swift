@@ -33,8 +33,6 @@ public class LocationServices : NSObject, CLLocationManagerDelegate {
         // TODO descendre ça à 1km
         locationManager!.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager!.distanceFilter = Global.locationDistance
-        
-        updateCity(PreferenceHelper.getSelectedCity())
     }
     
     public func updateCity(_ cityToUse:City) {
@@ -44,7 +42,7 @@ public class LocationServices : NSObject, CLLocationManagerDelegate {
         
         if LocationServices.isUseCurrentLocation(cityToUse) {
             #if DEBUG
-                print("updateCity " + cityToUse.frenchName)
+                print("updateCity localisation")
             #endif
                 
             enableLocation()
@@ -100,25 +98,13 @@ public class LocationServices : NSObject, CLLocationManagerDelegate {
         #endif
         
         getAdressAndValidateCanada(location)
-        
+    }
+    
+    func getClosestLocation(_ location: CLLocation) -> LocatedCity? {
         if locations == nil {
             buildLocations()
         }
         
-        if let closestLocation = getClosestLocation(location) {
-            print("closest location: \(closestLocation.city.frenchName), distance: \(location.distance(from: closestLocation.location))")
-            if closestLocation.city.id != PreferenceHelper.getCityToUse().id {
-                cityHasBeenUpdated(closestLocation.city)
-            }
-        } else {
-            #if DEBUG
-                print("coordinates is empty or too far")
-            #endif
-            delegate!.errorLocating(LocationErrors.LocationTooFarOrEmpty)
-        }
-    }
-    
-    func getClosestLocation(_ location: CLLocation) -> LocatedCity? {
         if let closestLocation = locations!.min(by: { location.distance(from: $0.location) < location.distance(from: $1.location) }) {
             print("closest location: \(closestLocation.city.frenchName), distance: \(location.distance(from: closestLocation.location))")
             if location.distance(from: closestLocation.location) < Global.currentLocationMaxDistance {
@@ -349,8 +335,29 @@ public class LocationServices : NSObject, CLLocationManagerDelegate {
                         self.delegate!.notInCanada(country)
                         return
                     }
+                    
+                    self.handleCanadianAddress(location)
                 }
             }
         })
+    }
+    
+    func handleCanadianAddress(_ location: CLLocation) {
+        if let closestLocation = getClosestLocation(location) {
+            print("closest location: \(closestLocation.city.frenchName), distance: \(location.distance(from: closestLocation.location))")
+            
+            delegate!.locatingCompleted()
+            
+            if closestLocation.city.id != PreferenceHelper.getCityToUse().id {
+                cityHasBeenUpdated(closestLocation.city)
+            } else {
+                delegate!.locationSameCity()
+            }
+        } else {
+            #if DEBUG
+                print("coordinates is empty or too far")
+            #endif
+            delegate!.errorLocating(LocationErrors.LocationTooFarOrEmpty)
+        }
     }
 }

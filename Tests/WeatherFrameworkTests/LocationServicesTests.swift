@@ -195,7 +195,7 @@ class LocationServicesTests: XCTestCase {
         
         service.locationManager(locationManager, didUpdateLocations: locations)
         XCTAssertFalse(locationManager.isRequestLocation)
-        XCTAssertTrue(delegate.isCityHasBeenUpdated)
+        XCTAssertFalse(delegate.isCityHasBeenUpdated)
     }
     
     func testDidUpdateLocations_errors() {
@@ -209,15 +209,15 @@ class LocationServicesTests: XCTestCase {
         XCTAssertFalse(delegate.isCityHasBeenUpdated)
     }
     
-    func testGetAdressLocalData() {
-        service.getAdressLocalData(location)
-        XCTAssertTrue(delegate.isCityHasBeenUpdated)
+    func handleCanadianAddress() {
+        service.handleCanadianAddress(location)
+        XCTAssertFalse(delegate.isCityHasBeenUpdated)
     }
     
-    func testGetAdressLocalData_error() {
+    func handleCanadianAddress_error() {
         location = CLLocation(latitude: 10.0, longitude: 10.0)
         
-        service.getAdressLocalData(location)
+        service.handleCanadianAddress(location)
         XCTAssertFalse(delegate.isCityHasBeenUpdated)
         XCTAssertEqual(LocationErrors.LocationTooFarOrEmpty, delegate.errorCode)
     }

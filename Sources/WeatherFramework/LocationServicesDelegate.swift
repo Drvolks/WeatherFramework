@@ -15,4 +15,6 @@ public protocol LocationServicesDelegate {
     func notInCanada(_ country:String)
     func errorLocating(_ errorCode:Int)
     func locationNotAvailable()
+    func locatingCompleted()
+    func locationSameCity()
 }

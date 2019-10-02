@@ -48,4 +48,8 @@ class LocationServicesDelegateMock : LocationServicesDelegate {
     func locationNotAvailable() {
         isLocationNotAvailable = true
     }
+    
+    func locatingCompleted() {
+        
+    }
 }
