@@ -1,11 +1,11 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 import PackageDescription
 
 let package = Package(
     name: "WeatherFramework",
     platforms: [
-        .iOS(SupportedPlatform.IOSVersion.v13),
-        .watchOS(SupportedPlatform.WatchOSVersion.v6)
+        .iOS(SupportedPlatform.IOSVersion.v14),
+        .watchOS(SupportedPlatform.WatchOSVersion.v7)
     ],
     products: [
         .library(name: "WeatherFramework", targets: ["WeatherFramework"]),

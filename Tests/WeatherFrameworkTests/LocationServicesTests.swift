@@ -47,7 +47,7 @@ class LocationServicesTests: XCTestCase {
         service.start(manager:locationManager)
         XCTAssertEqual(kCLLocationAccuracyThreeKilometers, locationManager.desiredAccuracy)
         XCTAssertEqual(Global.locationDistance, locationManager.distanceFilter)
-        XCTAssertTrue(service.serviceActive)
+        XCTAssertFalse(service.serviceActive)
     }
     
     func testUpdateCity_UseCurrentLocation() {

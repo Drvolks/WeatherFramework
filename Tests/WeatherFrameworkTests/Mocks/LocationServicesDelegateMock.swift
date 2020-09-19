@@ -52,4 +52,8 @@ class LocationServicesDelegateMock : LocationServicesDelegate {
     func locatingCompleted() {
         
     }
+    
+    func locationSameCity() {
+
+    }
 }
