@@ -22,7 +22,7 @@ public class UrlHelper {
     }
     
     public static func getRadarUrl(_ city: City) -> String {
-        let url = "radarUrl".localized().replacingOccurrences(of: "{id}", with: city.radarId)
+        let url = "radarUrl".localized().replacingOccurrences(of: "{longitude}", with: city.longitude).replacingOccurrences(of: "{latitude}", with: city.latitude)
         
         return url
     }
