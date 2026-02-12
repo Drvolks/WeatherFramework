@@ -110,7 +110,7 @@ public class PreferenceHelper {
         NSKeyedArchiver.setClassName("City", for: City.self)
         let archivedObject = try! NSKeyedArchiver.archivedData(withRootObject: cities, requiringSecureCoding: false)
         defaults.set(archivedObject, forKey: Global.favotiteCitiesKey)
-        defaults.synchronize()
+
     }
     
     public static func saveSelectedCity(_ city: City) {
@@ -118,7 +118,7 @@ public class PreferenceHelper {
         let archivedObject = try! NSKeyedArchiver.archivedData(withRootObject: city, requiringSecureCoding: false)
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         defaults.set(archivedObject, forKey: Global.selectedCityKey)
-        defaults.synchronize()
+
     }
     
     public static func getSelectedCity() -> City {
@@ -250,7 +250,7 @@ public class PreferenceHelper {
     public static func saveLanguage(_ language: Language) {
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         defaults.set(language.rawValue, forKey: Global.languageKey)
-        defaults.synchronize()
+
         
         ExpiringCache.instance.removeAllObjects()
     }
@@ -295,7 +295,7 @@ public class PreferenceHelper {
             
             if previousVersion != currentVersionDouble {
                 defaults.set(currentVersionDouble, forKey: Global.versionKey)
-                defaults.synchronize()
+        
             }
         }
     }
@@ -318,12 +318,12 @@ public class PreferenceHelper {
         let archivedObject = try! NSKeyedArchiver.archivedData(withRootObject: city, requiringSecureCoding: false)
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         defaults.set(archivedObject, forKey: Global.lastLocatedCityKey)
-        defaults.synchronize()
+
     }
     
     public static func removeLastLocatedCity() {
         let defaults = UserDefaults(suiteName: Global.SettingGroup)!
         defaults.removeObject(forKey: Global.lastLocatedCityKey)
-        defaults.synchronize()
+
     }
 }

@@ -315,7 +315,7 @@ public class WeatherHelper {
     public static func textToImageMinMax(_ weather: WeatherInformation)->UIImage{
         let baseImage = getMinMaxImage(weather, header: false)
         let text = String(weather.temperature)
-        
+
         var offsetLeft = 20
         var offsetTop = 10
         var textFont = UIFont.systemFont(ofSize: 55)
@@ -326,30 +326,23 @@ public class WeatherHelper {
             offsetTop = 14
             textFont = UIFont.systemFont(ofSize: 45)
         }
-        
+
         let textColor = UIColor.white
-        
-        //Setup the image context using the passed image.
-        UIGraphicsBeginImageContext(baseImage.size)
-        
-        let textFontAttributes = [
-            NSAttributedString.Key.font: textFont,
-            NSAttributedString.Key.foregroundColor: textColor,
-            ] as [NSAttributedString.Key : Any]
-        
-        //Put the image into a rectangle as large as the original image.
-        baseImage.draw(in: CGRect(x: 0, y: 0, width: baseImage.size.width, height: baseImage.size.height))
-        
-        // Creating a point within the space that is as bit as the image.
-        let rect: CGRect = CGRect(x: CGFloat(offsetLeft), y: CGFloat(offsetTop), width: baseImage.size.width, height: baseImage.size.height)
-        
-        text.draw(in: rect, withAttributes: textFontAttributes)
-        
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        
-        // End the context now that we have the image we need
-        UIGraphicsEndImageContext()
-        
+
+        let renderer = UIGraphicsImageRenderer(size: baseImage.size)
+        let newImage = renderer.image { context in
+            let textFontAttributes = [
+                NSAttributedString.Key.font: textFont,
+                NSAttributedString.Key.foregroundColor: textColor,
+                ] as [NSAttributedString.Key : Any]
+
+            baseImage.draw(in: CGRect(x: 0, y: 0, width: baseImage.size.width, height: baseImage.size.height))
+
+            let rect: CGRect = CGRect(x: CGFloat(offsetLeft), y: CGFloat(offsetTop), width: baseImage.size.width, height: baseImage.size.height)
+
+            text.draw(in: rect, withAttributes: textFontAttributes)
+        }
+
         return newImage
     }
     

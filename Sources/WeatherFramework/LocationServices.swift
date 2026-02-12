@@ -178,9 +178,9 @@ public class LocationServices : NSObject, CLLocationManagerDelegate {
             print("getCurrentLocation")
         #endif
         
-        handleLocationServicesAuthorizationStatus(status: locationManagerType.authorizationStatus())
+        handleLocationServicesAuthorizationStatus(status: locationManager!.authorizationStatus)
     }
-    
+
     func handleLocationServicesAuthorizationStatus(status: CLAuthorizationStatus)
     {
         #if DEBUG
@@ -237,18 +237,17 @@ public class LocationServices : NSObject, CLLocationManagerDelegate {
         }
     }
     
-    public func locationManager(_ manager: CLLocationManager,
-                         didChangeAuthorization status: CLAuthorizationStatus) {
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         #if DEBUG
             print("locationManager didChangeAuthorization")
         #endif
-        
-        handleLocationServicesAuthorizationStatus(status: status)
+
+        handleLocationServicesAuthorizationStatus(status: manager.authorizationStatus)
     }
     
     func escalateLocationServiceAuthorization() {
         // Escalate only when the authorization is set to when-in-use
-        if locationManagerType.authorizationStatus() == .authorizedWhenInUse {
+        if locationManager!.authorizationStatus == .authorizedWhenInUse {
             locationManager!.requestAlwaysAuthorization()
         }
     }

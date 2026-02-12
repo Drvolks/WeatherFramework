@@ -21,17 +21,12 @@ class ExpiringCache : NSCache<NSString, AnyObject> {
     
     func setObject(_ obj: AnyObject, forKey key: NSString, timeout: TimeInterval) {
         super.setObject(obj, forKey: key)
-        Timer.scheduledTimer(timeInterval: timeout, target: self, selector: #selector(ExpiringCache.timerExpires(_:)), userInfo: [ExpiringCacheObjectKey : key], repeats: false)
+        Timer.scheduledTimer(withTimeInterval: timeout, repeats: false) { [weak self] _ in
+            self?.removeObject(forKey: key)
+        }
     }
-    
+
     override func setObject(_ obj: AnyObject, forKey key: NSString) {
          self.setObject(obj, forKey: key, timeout: ExpiringCacheDefaultTimeout)
-    }
-    
-    @objc func timerExpires(_ timer: Timer) {
-        let userinfo = timer.userInfo as! Dictionary<String,NSString>
-        if let key = userinfo[ExpiringCacheObjectKey] {
-            removeObject(forKey: key)
-        }
     }
 }
