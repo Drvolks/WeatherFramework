@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreText
 
 public class WeatherHelper {
     static let offline = false
@@ -329,6 +330,39 @@ public class WeatherHelper {
 
         let textColor = UIColor.white
 
+        #if os(watchOS)
+        let size = baseImage.size
+        guard let cgImage = baseImage.cgImage else { return baseImage }
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        guard let context = CGContext(
+            data: nil,
+            width: Int(size.width),
+            height: Int(size.height),
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: colorSpace,
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else { return baseImage }
+
+        context.draw(cgImage, in: CGRect(origin: .zero, size: size))
+
+        // Flip for text drawing (CoreGraphics origin is bottom-left)
+        context.translateBy(x: 0, y: size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+
+        let textFontAttributes: [NSAttributedString.Key: Any] = [
+            .font: textFont,
+            .foregroundColor: textColor
+        ]
+        let attributedString = NSAttributedString(string: text, attributes: textFontAttributes)
+        let line = CTLineCreateWithAttributedString(attributedString)
+
+        context.textPosition = CGPoint(x: CGFloat(offsetLeft), y: size.height - CGFloat(offsetTop) - textFont.ascender)
+        CTLineDraw(line, context)
+
+        guard let resultCGImage = context.makeImage() else { return baseImage }
+        return UIImage(cgImage: resultCGImage)
+        #else
         let renderer = UIGraphicsImageRenderer(size: baseImage.size)
         let newImage = renderer.image { context in
             let textFontAttributes = [
@@ -344,6 +378,7 @@ public class WeatherHelper {
         }
 
         return newImage
+        #endif
     }
     
     public static func getRefreshTime(_ wrapper: WeatherInformationWrapper) -> String {
